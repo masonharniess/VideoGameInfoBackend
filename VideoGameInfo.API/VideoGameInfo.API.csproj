@@ -19,4 +19,11 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Entities\" />
+    <Folder Include="Migrations\" />
+    <Folder Include="DbContexts\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>
