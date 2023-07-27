@@ -1,6 +1,24 @@
-﻿namespace VideoGameInfo.API.Entities
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace VideoGameInfo.API.Entities
 {
-    public class Games
+    public class Game
     {
+        public Game(String title) {
+            Title = title;
+        }
+
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        public string Title { get; set; }
+
+        [ForeignKey("DeveloperId")]
+        public Developer? Developer { get; set; }
+        public int DeveloperId { get; set; }
     }
 }
