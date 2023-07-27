@@ -8,9 +8,13 @@ namespace VideoGameInfo.API.Controllers
     [Route("api/developers")]
     public class DevelopersController : ControllerBase
     {
+
+        public DevelopersController() { }
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DevelopersWithoutGamesDto>>> GetDevelopers()
         {
+
             return Ok();
         }
     }

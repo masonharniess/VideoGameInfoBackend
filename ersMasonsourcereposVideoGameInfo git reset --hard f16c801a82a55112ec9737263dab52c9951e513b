@@ -1,0 +1,36 @@
+[33mcommit 4be78799cc7c6dffda6fa3471462661c8735a5d9[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Merge: f16c801 c9a046c
+Author: Mason Harniess <maseharniess@outlook.com>
+Date:   Tue Jul 25 16:52:21 2023 +0100
+
+    Merge branch 'master' of https://github.com/masonharniess/VideoGameInfo
+
+[33mcommit f16c801a82a55112ec9737263dab52c9951e513b[m
+Author: Mason Harniess <maseharniess@outlook.com>
+Date:   Tue Jul 25 16:52:05 2023 +0100
+
+    feat: add DevelopersController and DevelopersWithoutGamesDto
+
+[33mcommit c9a046cf722da79e2a9ccc2df13aa92c96d0478e[m
+Author: Mason Harniess <102977508+masonharniess@users.noreply.github.com>
+Date:   Tue Jul 25 15:55:27 2023 +0100
+
+    docs: create readme.md
+
+[33mcommit 2dd6bc9488668d419b0c611144c8c066fe48e5e2[m
+Author: Mason Harniess <maseharniess@outlook.com>
+Date:   Tue Jul 25 15:54:13 2023 +0100
+
+    build: add nuget packages and prevent automatic browser launch
+
+[33mcommit 41e7ec6b75db0179a74472239fc869ad1d6f5b1e[m
+Author: Mason Harniess <maseharniess@outlook.com>
+Date:   Tue Jul 25 15:49:23 2023 +0100
+
+    Add project files.
+
+[33mcommit 75c1de5a9422918505fe3d5304dd9c4e0e80e3e7[m
+Author: Mason Harniess <maseharniess@outlook.com>
+Date:   Tue Jul 25 15:49:22 2023 +0100
+
+    Add .gitattributes and .gitignore.
