@@ -1,6 +1,8 @@
-﻿namespace VideoGameInfo.API.Profiles
+﻿using AutoMapper;
+
+namespace VideoGameInfo.API.Profiles
 {
-    public class DeveloperProfile
+    public class DeveloperProfile : Profile
     {
         public DeveloperProfile() { 
             CreateMap<Entities.Developer, Models.DevelopersWithoutGamesDto>();
