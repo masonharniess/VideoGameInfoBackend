@@ -34,7 +34,7 @@ namespace VideoGameInfo.API.DbContexts
                 );
 
             modelBuilder.Entity<VideoGame>().HasData(
-                new VideoGame("The Last of Us Part I")
+                new VideoGame("The Last of Us Part II")
                 {
                     Id = 1,
                     DeveloperId = 1,
