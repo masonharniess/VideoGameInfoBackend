@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VideoGameInfo.API.Entities
 {
-    public class Game
+    public class VideoGame
     {
-        public Game(String title) {
+        public VideoGame(String title) {
             Title = title;
         }
 

@@ -8,7 +8,7 @@ namespace VideoGameInfo.API.DbContexts
         public VideoGameInfoContext(DbContextOptions<VideoGameInfoContext> options) : base(options) { }
 
         public DbSet<Developer> Developers { get; set; } = null!;
-        public DbSet<Game> Games { get; set; } = null!;
+        public DbSet<VideoGame> Games { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -33,43 +33,43 @@ namespace VideoGameInfo.API.DbContexts
                 }
                 );
 
-            modelBuilder.Entity<Game>().HasData(
-                new Game("The Last of Us Part I")
+            modelBuilder.Entity<VideoGame>().HasData(
+                new VideoGame("The Last of Us Part I")
                 {
                     Id = 1,
                     DeveloperId = 1,
                     Description = "The Last of Us Part II is a 2020 action-adventure game developed by " +
                     "Naughty Dog and published by Sony Interactive Entertainment for the PlayStation 4."
                 },
-                new Game("Uncharted 4: A Thief's End")
+                new VideoGame("Uncharted 4: A Thief's End")
                 {
                     Id = 2,
                     DeveloperId = 1,
                     Description = "Uncharted 4: A Thief's End is a 2016 action-adventure game developed " +
                     "by Naughty Dog and published by Sony Computer Entertainment."
                 },
-                new Game("Grand Theft Auto V")
+                new VideoGame("Grand Theft Auto V")
                 {
                     Id = 3,
                     DeveloperId = 2,
                     Description = "Grand Theft Auto V is a 2013 action-adventure game developed by Rockstar " +
                     "North and published by Rockstar Games."
                 },
-                new Game("Red Dead Redemption 2")
+                new VideoGame("Red Dead Redemption 2")
                 {
                     Id = 4,
                     DeveloperId = 2,
                     Description = "Red Dead Redemption 2 is a 2018 action-adventure game developed and " +
                     "published by Rockstar Games."
                 },
-                new Game("Metal Gear Solid")
+                new VideoGame("Metal Gear Solid")
                 {
                     Id = 5,
                     DeveloperId = 3,
                     Description = "Metal Gear Solid is an action-adventure stealth video game developed " +
                     "and published by Konami for the PlayStation in 1998."
                 },
-                new Game("Silent Hill")
+                new VideoGame("Silent Hill")
                 {
                     Id = 6,
                     DeveloperId = 3,
