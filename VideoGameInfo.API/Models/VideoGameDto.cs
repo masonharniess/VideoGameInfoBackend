@@ -7,8 +7,10 @@
             Name = name;
         }
 
+        public VideoGameDto() { }
+
         public int Id { get; }
-        public string Name { get; }
-        public string? Description { get; }
+        public string Name { get; } = string.Empty;
+        public string? Description { get; init; }
     }
 }
