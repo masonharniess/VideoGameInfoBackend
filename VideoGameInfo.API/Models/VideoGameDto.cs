@@ -2,15 +2,15 @@
 {
     public class VideoGameDto
     {
-        public VideoGameDto(int id, string name) {
-            Id = id;
-            Name = name;
-        }
+        //public VideoGameDto(int id, string name) {
+        //    Id = id;
+        //    Name = name;
+        //}
 
-        public VideoGameDto() { }
+        //public VideoGameDto() { }
 
-        public int Id { get; }
-        public string Name { get; } = string.Empty;
-        public string? Description { get; init; }
+        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string? Description { get; set; }
     }
 }

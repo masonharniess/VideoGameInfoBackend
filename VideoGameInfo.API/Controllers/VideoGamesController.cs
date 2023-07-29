@@ -37,7 +37,7 @@ namespace VideoGameInfo.API.Controllers
 
             var results = _mapper.Map<IEnumerable<VideoGameDto>>(videoGamesForDeveloper);
 
-            return Ok(_mapper.Map<IEnumerable<VideoGameDto>>(videoGamesForDeveloper));
+            return Ok(results);
         }
 
         [HttpGet("{videoGameId}", Name = "GetVideoGame")]
@@ -65,22 +65,22 @@ namespace VideoGameInfo.API.Controllers
         }
     }
 
-    public static class VideoGameConversionExtension
-    {
-        public static VideoGameDto ToDto(this Entities.VideoGame entity)
-        {
-            return new VideoGameDto(entity.Id, entity.Title)
-            {
-                Description = entity.Description,
-            };
-        }
+    //public static class VideoGameConversionExtension
+    //{
+    //    public static VideoGameDto ToDto(this Entities.VideoGame entity)
+    //    {
+    //        return new VideoGameDto(entity.Id, entity.Title)
+    //        {
+    //            Description = entity.Description,
+    //        };
+    //    }
         
-        public static IEnumerable<VideoGameDto> ToDtos(this IEnumerable<Entities.VideoGame> entities)
-        {
-            IEnumerable<VideoGameDto> dtos = entities.Select(e => e.ToDto());
-            return dtos;
-        }
-    }
+    //    public static IEnumerable<VideoGameDto> ToDtos(this IEnumerable<Entities.VideoGame> entities)
+    //    {
+    //        IEnumerable<VideoGameDto> dtos = entities.Select(e => e.ToDto());
+    //        return dtos;
+    //    }
+    //}
 
     public sealed class MyFrameworkClass
     {
