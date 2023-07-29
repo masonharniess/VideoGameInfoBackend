@@ -27,19 +27,17 @@ namespace VideoGameInfo.API.Controllers
                 return NotFound();
             }
 
-            IEnumerable<VideoGame> videoGamesForDeveloper = await
-                _developerInfoRepository.GetVideoGamesForDeveloperAsync(developerId);
+            //IEnumerable<VideoGame> videoGamesForDeveloper = await
+            //    _developerInfoRepository.GetVideoGamesForDeveloperAsync(developerId);
 
-            IEnumerable<VideoGameDto> results = videoGamesForDeveloper.ToDtos();
+            //IEnumerable<VideoGameDto> results = videoGamesForDeveloper.ToDtos();
 
-            return Ok(results);
+            IEnumerable<VideoGame> videoGamesForDeveloper = 
+                await _developerInfoRepository.GetVideoGamesForDeveloperAsync(developerId);
 
-            //IEnumerable<VideoGame> videoGamesForDeveloper = 
-            //    await _developerInfoRepository.GetVideoGamesForDeveloperAsync(developerId);
+            var results = _mapper.Map<IEnumerable<VideoGameDto>>(videoGamesForDeveloper);
 
-            ////var results = _mapper.Map<IEnumerable<VideoGameDto>>(videoGamesForDeveloper);
-
-            //return Ok(_mapper.Map<IEnumerable<VideoGameDto>>(videoGamesForDeveloper));
+            return Ok(_mapper.Map<IEnumerable<VideoGameDto>>(videoGamesForDeveloper));
         }
 
         [HttpGet("{videoGameId}", Name = "GetVideoGame")]
