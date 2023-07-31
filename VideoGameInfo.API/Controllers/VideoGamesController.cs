@@ -13,15 +13,13 @@ namespace VideoGameInfo.API.Controllers
         private readonly IDeveloperInfoRepository _developerInfoRepository;
         private readonly IMapper _mapper;
 
-        public VideoGamesController(IDeveloperInfoRepository developerInfoRepository, IMapper mapper)
-        {
+        public VideoGamesController(IDeveloperInfoRepository developerInfoRepository, IMapper mapper) {
             _developerInfoRepository = developerInfoRepository ?? throw new ArgumentNullException();
             _mapper = mapper ?? throw new ArgumentNullException();
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<VideoGameDto>>> GetVideoGames(int developerId)
-        {
+        public async Task<ActionResult<IEnumerable<VideoGameDto>>> GetVideoGames(int developerId) {
             if (!await _developerInfoRepository.DeveloperExistsAsync(developerId))
             {
                 return NotFound();
@@ -41,18 +39,14 @@ namespace VideoGameInfo.API.Controllers
         }
 
         [HttpGet("{videoGameId}", Name = "GetVideoGame")]
-        public async Task<ActionResult<VideoGameDto>> GetVideoGame(int developerId, int videoGameId)
-        {
+        public async Task<ActionResult<VideoGameDto>> GetVideoGame(int developerId, int videoGameId) {
             if (!await _developerInfoRepository.DeveloperExistsAsync(developerId))
             {
                 return NotFound();
             }
 
-            var videoGame = await _developerInfoRepository.GetVideoGameForDeveloperAsync(
+            VideoGame? videoGame = await _developerInfoRepository.GetVideoGameForDeveloperAsync(
                 developerId, videoGameId);
-
-            MyFrameworkClass instance = new();
-            instance.Hi();
 
             if (videoGame == null)
             {
@@ -61,6 +55,31 @@ namespace VideoGameInfo.API.Controllers
             else
             {
                 return Ok(_mapper.Map<VideoGameDto>(videoGame));
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<VideoGameDto>> CreateVideoGame(int developerId, [FromBody] VideoGameForCreationDto videoGame) {
+            if (!await _developerInfoRepository.DeveloperExistsAsync(developerId))
+            {
+                return NotFound();
+            }
+            else
+            {
+                VideoGame finalVideoGame = _mapper.Map<VideoGame>(videoGame);
+
+                await _developerInfoRepository.AddVideoGameForDeveloperAsync(developerId, finalVideoGame);
+                await _developerInfoRepository.SaveChangesAsync();
+
+                VideoGameDto createdVideoGameToReturn = _mapper.Map<VideoGameDto>(finalVideoGame);
+
+                return CreatedAtRoute("GetVideoGame",
+                    new
+                    {
+                        developerId = developerId,
+                        videoGameId = finalVideoGame.Id
+                    },
+                    createdVideoGameToReturn);
             }
         }
     }
@@ -90,15 +109,6 @@ namespace VideoGameInfo.API.Controllers
         public void DoStuff()
         {
             return;
-        }
-    }
-
-    public static class Hello
-    {
-        public static int Hi(this MyFrameworkClass instance) 
-        {
-            instance.DoStuff();
-            return 0;
         }
     }
 }

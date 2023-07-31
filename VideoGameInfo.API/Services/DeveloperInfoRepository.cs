@@ -54,7 +54,7 @@ namespace VideoGameInfo.API.Services
             }
         }
 
-        public  void DeleteVideoGameAsync(VideoGame videoGame)
+        public void DeleteVideoGameAsync(VideoGame videoGame)
         {
             _context.Games.Remove(videoGame);
         }
