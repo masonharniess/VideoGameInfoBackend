@@ -22,7 +22,7 @@ namespace VideoGameInfo.API.Services
         {
             if (includeVideoGames)
             {
-                return await _context.Developers.Where(c => c.Id == developerId).FirstOrDefaultAsync();
+                return await _context.Developers.Include(c => c.VideoGames).Where(c => c.Id == developerId).FirstOrDefaultAsync();
             }
             else
             {
@@ -50,7 +50,7 @@ namespace VideoGameInfo.API.Services
             var developer = await GetDeveloperAsync(developerId, false);
             if (developer != null)
             {
-                developer.Games.Add(videoGame);
+                developer.VideoGames.Add(videoGame);
             }
         }
 

@@ -23,14 +23,14 @@ namespace VideoGameInfo.API.Controllers
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DevelopersWithoutGamesDto>>> GetDevelopers() {
-            var developerEntities = await _developerInfoRepository.GetDevelopersAsync();
+            IEnumerable<Developer> developerEntities = await _developerInfoRepository.GetDevelopersAsync();
             return Ok(_mapper.Map<IEnumerable<DevelopersWithoutGamesDto>>(developerEntities));
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetDeveloper(int id, bool includeVideoGames = false) {
-            
-            var developer = await _developerInfoRepository.GetDeveloperAsync(id, includeVideoGames);
+
+            Developer? developer = await _developerInfoRepository.GetDeveloperAsync(id, includeVideoGames);
             
             if (developer == null)
             {

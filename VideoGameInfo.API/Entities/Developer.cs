@@ -20,7 +20,7 @@ namespace VideoGameInfo.API.Entities
         [MaxLengthAttribute(200)]
         public string? Description { get; set; }
 
-        public ICollection<VideoGame> Games { get; set; } = new List<VideoGame>();
+        public ICollection<VideoGame> VideoGames { get; set; } = new List<VideoGame>();
 
     }
 }

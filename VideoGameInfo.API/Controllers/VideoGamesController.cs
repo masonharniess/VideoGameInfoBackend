@@ -35,7 +35,7 @@ namespace VideoGameInfo.API.Controllers
             IEnumerable<VideoGame> videoGamesForDeveloper = 
                 await _developerInfoRepository.GetVideoGamesForDeveloperAsync(developerId);
 
-            var results = _mapper.Map<IEnumerable<VideoGameDto>>(videoGamesForDeveloper);
+            IEnumerable<VideoGameDto> results = _mapper.Map<IEnumerable<VideoGameDto>>(videoGamesForDeveloper);
 
             return Ok(results);
         }
