@@ -26,8 +26,8 @@ namespace VideoGameInfo.API {
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddDbContext<VideoGameInfoContext>(DbContextOptions => DbContextOptions.UseSqlite(
-                builder.Configuration["ConnectionStrings:VideoGameInfoDBConnectionString"]));
+            builder.Services.AddDbContext<VideoGameInfoContext>(DbContextOptions => DbContextOptions
+                .UseSqlite(builder.Configuration["ConnectionStrings:VideoGameInfoDBConnectionString"]));
             builder.Services.AddScoped<IDeveloperInfoRepository, DeveloperInfoRepository>();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
