@@ -7,8 +7,8 @@ namespace VideoGameInfo.API.Profiles
         public VideoGameProfile() {
             CreateMap<Entities.VideoGame, Models.VideoGameDto>();
             CreateMap<Models.VideoGameForCreationDto, Entities.VideoGame>();
-            //CreateMap<Models.VideoGameForUpdateDto, Entities.VideoGame>();
-            //CreateMap<Entities.VideoGame, Models.VideoGameForUpdateDto>();
+            CreateMap<Models.VideoGameForUpdateDto, Entities.VideoGame>();
+            CreateMap<Entities.VideoGame, Models.VideoGameForUpdateDto>();
         }
     }
 }

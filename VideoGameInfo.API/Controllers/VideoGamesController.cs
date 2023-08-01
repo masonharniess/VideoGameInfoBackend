@@ -59,7 +59,9 @@ namespace VideoGameInfo.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<VideoGameDto>> CreateVideoGame(int developerId, [FromBody] VideoGameForCreationDto videoGame) {
+        public async Task<ActionResult<VideoGameDto>> CreateVideoGame(int developerId, 
+            [FromBody] VideoGameForCreationDto videoGame) {
+
             if (!await _developerInfoRepository.DeveloperExistsAsync(developerId))
             {
                 return NotFound();
@@ -81,6 +83,29 @@ namespace VideoGameInfo.API.Controllers
                     },
                     createdVideoGameToReturn);
             }
+        }
+
+        [HttpPut("{videoGameId}")]
+        public async Task<ActionResult> UpdateVideoGame(int developerId, int videoGameId,
+            [FromBody] VideoGameForUpdateDto videoGame) { 
+
+            if (!await _developerInfoRepository.DeveloperExistsAsync(developerId))
+            {
+                return NotFound();
+            }
+
+            VideoGame? videoGameEntity = await _developerInfoRepository.GetVideoGameForDeveloperAsync(developerId, videoGameId);
+
+            if (videoGameEntity == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map(videoGame, videoGameEntity);
+
+            await _developerInfoRepository.SaveChangesAsync();
+
+            return NoContent();
         }
     }
 
