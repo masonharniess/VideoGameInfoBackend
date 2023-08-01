@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using VideoGameInfo.API.Entities;
 using VideoGameInfo.API.Models;
@@ -30,7 +31,7 @@ namespace VideoGameInfo.API.Controllers
 
             //IEnumerable<VideoGameDto> results = videoGamesForDeveloper.ToDtos();
 
-            IEnumerable<VideoGame> videoGamesForDeveloper = 
+            IEnumerable<VideoGame> videoGamesForDeveloper =
                 await _developerInfoRepository.GetVideoGamesForDeveloperAsync(developerId);
 
             IEnumerable<VideoGameDto> results = _mapper.Map<IEnumerable<VideoGameDto>>(videoGamesForDeveloper);
@@ -59,7 +60,7 @@ namespace VideoGameInfo.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<VideoGameDto>> CreateVideoGame(int developerId, 
+        public async Task<ActionResult<VideoGameDto>> CreateVideoGame(int developerId,
             [FromBody] VideoGameForCreationDto videoGame) {
 
             if (!await _developerInfoRepository.DeveloperExistsAsync(developerId))
@@ -87,7 +88,7 @@ namespace VideoGameInfo.API.Controllers
 
         [HttpPut("{videoGameId}")]
         public async Task<ActionResult> UpdateVideoGame(int developerId, int videoGameId,
-            [FromBody] VideoGameForUpdateDto videoGame) { 
+            [FromBody] VideoGameForUpdateDto videoGame) {
 
             if (!await _developerInfoRepository.DeveloperExistsAsync(developerId))
             {
@@ -107,7 +108,48 @@ namespace VideoGameInfo.API.Controllers
 
             return NoContent();
         }
+
+        [HttpPatch("{videoGameId}")]
+        public async Task<ActionResult> PartiallyUpdateVideoGame(int developerId, int videoGameId,
+            JsonPatchDocument<VideoGameForUpdateDto> patchDocument) {
+
+            if (!await _developerInfoRepository.DeveloperExistsAsync(developerId))
+            {
+                return NotFound();
+            }
+
+            VideoGame? videoGameEntity = await _developerInfoRepository
+                .GetVideoGameForDeveloperAsync(developerId, videoGameId);
+
+            if (videoGameEntity == null) 
+            {
+                return NotFound();
+            }
+
+            VideoGameForUpdateDto videoGameToPatch = 
+                _mapper.Map<VideoGameForUpdateDto>(videoGameEntity);
+
+            patchDocument.ApplyTo(videoGameToPatch, ModelState);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            if (!TryValidateModel(videoGameToPatch))
+            {
+                return BadRequest(ModelState);
+            }
+
+            _mapper.Map(videoGameToPatch, videoGameEntity);
+
+            await _developerInfoRepository.SaveChangesAsync();
+
+            return NoContent();
+        }
     }
+
+
 
     //public static class VideoGameConversionExtension
     //{
