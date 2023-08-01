@@ -147,6 +147,28 @@ namespace VideoGameInfo.API.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete("{videoGameId}")]
+        public async Task<ActionResult> DeleteVideoGame(int developerId, int videoGameId) {
+            if (!await _developerInfoRepository.DeveloperExistsAsync(developerId))
+            {
+                return NotFound("Stink");
+            }
+
+            VideoGame? videoGameEntity = await _developerInfoRepository
+                .GetVideoGameForDeveloperAsync(developerId, videoGameId);
+
+            if (videoGameEntity == null)
+            {
+                return NotFound(ModelState);
+            }
+
+            _developerInfoRepository.DeleteVideoGameAsync(videoGameEntity);
+
+            await _developerInfoRepository.SaveChangesAsync();
+
+            return NoContent();
+        }
     }
 
 
