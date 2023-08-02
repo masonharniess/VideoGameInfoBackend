@@ -189,15 +189,4 @@ namespace VideoGameInfo.API.Controllers
     //        return dtos;
     //    }
     //}
-
-    public sealed class MyFrameworkClass
-    {
-        public int MyProperty { get; set; }
-        public int MyProperty1 { get; set; }    
-
-        public void DoStuff()
-        {
-            return;
-        }
-    }
 }
