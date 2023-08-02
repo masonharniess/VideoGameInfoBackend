@@ -171,8 +171,6 @@ namespace VideoGameInfo.API.Controllers
         }
     }
 
-
-
     //public static class VideoGameConversionExtension
     //{
     //    public static VideoGameDto ToDto(this Entities.VideoGame entity)
